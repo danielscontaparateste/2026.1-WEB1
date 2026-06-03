@@ -1,15 +1,8 @@
 var numSorteado; // variável global
 
-function iniciar(){
-    // alert("OI");
+function gerarTabuleiro(valor){
 
-    var valor = document.getElementById("iptQtd").value;
-
-    valor = parseInt(valor);
-
-    sorteio(valor);
-
-    for (var k=0; k<valor; k++){
+  for (var k=0; k<valor; k++){
         // spnRes = document.createElement("span");
 
         spnRes = document.createElement("div");
@@ -34,14 +27,64 @@ function iniciar(){
 
         document.getElementById("principal").appendChild(spnRes);
 
-    }
+    }      
+
+}    
+
+
+function iniciar(){
+    // alert("OI");
+
+    var valor = document.getElementById("iptQtd").value;
+
+    var bttIniciar = document.getElementById("btnIni");
+    
+    bttIniciar.removeEventListener("click", iniciar);
+    // bttIniciar.style.backgroundColor = "gray";
+
+    // bttIniciar.disabled = true;
+
+    trocarButton("iniciar");
+
+    valor = parseInt(valor);
+
+    gerarTabuleiro(valor);
+    
+    sorteio(valor);
 
     // var spnRes = document.getElementById("spnRes");
+}
+
+function trocarButton(flag){
+    var bttIniciar = document.getElementById("btnIni");
+    
+    if (flag == "iniciar"){
+        bttIniciar.removeEventListener("click", iniciar);
+        bttIniciar.addEventListener("click", reiniciar);
+        bttIniciar.style.backgroundColor = "gray";
+        bttIniciar.textContent = "Reiniciar";
+    }else if (flag == "reiniciar"){
+        bttIniciar.removeEventListener("click", reiniciar);
+        bttIniciar.addEventListener("click", iniciar);    
+        bttIniciar.textContent = "Iniciar";
+    }else{
+        return;
+    }
+    // bttIniciar.disabled = false;
+}
+
+function reiniciar(){
+    var principal = document.getElementById("principal");
+    principal.innerHTML = "";
+    numSorteado = null;
+
+    trocarButton("reiniciar");
 }
 
 function conferencia(num){
     if (num == numSorteado){
         alert("Parabéns, você acertou o número sorteado!");
+        reiniciar();
         return;
     }
 }

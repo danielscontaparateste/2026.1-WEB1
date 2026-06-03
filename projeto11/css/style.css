@@ -14,10 +14,10 @@ body{
 
 #btnIni{
     padding: 5px;
-    background-color: green;
+    /* background-color: green;
     border: 1px solid green;
     color: white;
-    border-radius: 10px;
+    border-radius: 10px; */
     margin-left: 30px;
 }
 
